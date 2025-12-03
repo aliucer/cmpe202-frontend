@@ -80,7 +80,7 @@ export default function LoginPage() {
 
       // Dispatch event to notify Header of auth change
       window.dispatchEvent(new CustomEvent('authStateChanged'));
-      
+
       // Redirect based on admin status
       if (data.is_admin) {
         window.location.href = "/admin";
@@ -88,7 +88,7 @@ export default function LoginPage() {
         window.location.href = "/landingpage";
       }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Login network error:", error);
       setSubmitError("Network error. Make sure the backend server is running on port 4000.");
     }
@@ -110,15 +110,14 @@ export default function LoginPage() {
           )}
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
-            
+
             {/* EMAIL */}
             <div className="flex flex-col">
               <input
                 type="email"
                 placeholder="Email"
-                className={`border p-2 rounded text-black ${
-                  emailError ? "border-red-500" : ""
-                }`}
+                className={`border p-2 rounded text-black ${emailError ? "border-red-500" : ""
+                  }`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -142,7 +141,7 @@ export default function LoginPage() {
           </form>
 
           <p className="text-sm text-center mt-4 text-gray-700">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/register" className="text-[#0033A0] font-medium">
               Register
             </Link>

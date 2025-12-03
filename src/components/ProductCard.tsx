@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ProductDetailedView from "./ProductDetailedView";
 import type { Product } from "@/app/utils/types";
@@ -17,7 +18,7 @@ interface ProductCardProps {
     status?: string; // Add status to show sold indicator
     sellerId?: string;
   };
-  showActions?: boolean; 
+  showActions?: boolean;
 }
 
 export default function ProductCard({ listing, showActions = true }: ProductCardProps) {
@@ -56,7 +57,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
           title: listingData.title,
           price: Number(listingData.price),
           description: listingData.description || "",
-          images: listingData.photos?.map((p: any) => p.url) || (listing.image ? [listing.image] : []),
+          images: listingData.photos?.map((p: { url: string }) => p.url) || (listing.image ? [listing.image] : []),
           sellerId: listingData.seller_id,
           sellerName: listingData.seller?.display_name,
           category: listingData.category?.name || "",
@@ -102,8 +103,9 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
       alert("Listing deleted successfully!");
       // Refresh the page to show updated list
       window.location.reload();
-    } catch (err: any) {
-      alert(`Failed to delete listing: ${err.message}`);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      alert(`Failed to delete listing: ${errorMessage}`);
     }
   };
 
@@ -150,9 +152,10 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
       setShowMarkSoldModal(false);
       // Refresh the page to show updated list
       window.location.reload();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error marking as sold:", err);
-      setError(err.message || "Failed to mark listing as sold. Please try again.");
+      const errorMessage = err instanceof Error ? err.message : "Failed to mark listing as sold. Please try again.";
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -172,7 +175,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
   };
 
   return (
-    <div 
+    <div
       className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden relative cursor-pointer hover:shadow-lg transition-shadow"
       onClick={handleCardClick}
     >
@@ -182,11 +185,14 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
         </div>
       )}
       {listing.image && (
-        <img
-          src={listing.image}
-          alt={listing.title}
-          className={`w-full h-48 object-cover ${isSold ? "opacity-60 grayscale-[30%]" : ""}`}
-        />
+        <div className="relative w-full h-48">
+          <Image
+            src={listing.image}
+            alt={listing.title}
+            fill
+            className={`object-cover ${isSold ? "opacity-60 grayscale-[30%]" : ""}`}
+          />
+        </div>
       )}
       <div className="p-4">
         <h3 className="font-bold text-lg">{listing.title}</h3>
@@ -200,7 +206,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
           <div className="flex flex-col gap-2 mt-4" onClick={(e) => e.stopPropagation()}>
             {!isSold && (
               <div className="flex justify-between gap-2">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleMarkAsSold();
@@ -209,7 +215,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
                 >
                   Mark as Sold
                 </button>
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEdit();
@@ -221,7 +227,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
               </div>
             )}
             {isSold && (
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   handleViewDetails();
@@ -240,7 +246,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
             <h2 className="text-xl font-bold mb-4 text-[#0033A0]">
-              Mark "{listing.title}" as Sold
+              Mark &quot;{listing.title}&quot; as Sold
             </h2>
 
             {error && (
@@ -250,7 +256,7 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
             )}
 
             <p className="text-gray-700 mb-6">
-              Are you sure you want to mark "{listing.title}" as sold?
+              Are you sure you want to mark &quot;{listing.title}&quot; as sold?
             </p>
 
             {/* Buttons */}
@@ -273,25 +279,21 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
                 {isSubmitting ? "Marking as Sold..." : "Yes, Mark as Sold"}
               </button>
             </div>
+            {/* Product Detailed View Modal */}
+            {showProductDetails && productData && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <ProductDetailedView
+                  product={productData}
+                  isOpen={showProductDetails}
+                  onClose={() => {
+                    setShowProductDetails(false);
+                    setProductData(null);
+                  }}
+                  showActions={true}
+                  isLoggedIn={true}
+                />
+              </div>
+            )}
           </div>
-        </div>
-      )}
-
-      {/* Product Detailed View Modal */}
-      {showProductDetails && productData && (
-        <div onClick={(e) => e.stopPropagation()}>
-          <ProductDetailedView
-            product={productData}
-            isOpen={showProductDetails}
-            onClose={() => {
-              setShowProductDetails(false);
-              setProductData(null);
-            }}
-            showActions={true}
-            isLoggedIn={true}
-          />
-        </div>
-      )}
-    </div>
-  );
+          );
 }

@@ -5,16 +5,16 @@
  */
 "use client";
 
-import CategoryList from "./CategoryList";
-import MaxPriceInput from "./MaxPriceInput";
+import CategoryList from "@/components/Filters/CategoryList";
+import MaxPriceInput from "@/components/Filters/MaxPriceInput";
 
 type FilterProps = {
-    categories : string[];
-    activeCategories : string[];
-    onToggleCategory : (c: string) => void;
+    categories: string[];
+    activeCategories: string[];
+    onToggleCategory: (c: string) => void;
 
-    maxPrice : number | undefined;
-    onMaxPriceChange : (p: number | undefined) => void;
+    maxPrice: number | undefined;
+    onMaxPriceChange: (p: number | undefined) => void;
 }
 
 export default function Sidebar({
@@ -33,15 +33,15 @@ export default function Sidebar({
             <section aria-labelledby="categories-heading">
                 <h2 id="categories-heading" className="text-lg font-semibold mb-2">Categories</h2>
                 <CategoryList
-                    categories = {categories}
-                    active = {activeCategories}
-                    onToggle= {onToggleCategory}
+                    categories={categories}
+                    active={activeCategories}
+                    onToggle={onToggleCategory}
                 />
             </section>
 
             <section aria-labelledby="other-filters-heading">
                 <h2 id="other-filters-heading" className="text-lg font-semibold mb-2">Other Filters</h2>
-                <MaxPriceInput price={maxPrice} onChange={onMaxPriceChange}/>
+                <MaxPriceInput price={maxPrice} onChange={onMaxPriceChange} />
             </section>
         </div>
     );

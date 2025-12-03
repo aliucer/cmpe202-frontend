@@ -84,7 +84,7 @@ export default function SellerDashboardPage() {
 
         const data = await res.json();
 
-        const mappedListings = data.listings.map((l: any) => ({
+        const mappedListings = data.listings.map((l: Listing & { category_id: string | number, photos: { url: string }[] }) => ({
           ...l,
           price: Number(l.price),
           category_id: Number(l.category_id),
@@ -92,8 +92,9 @@ export default function SellerDashboardPage() {
         }));
 
         setListings(mappedListings);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -174,7 +175,7 @@ export default function SellerDashboardPage() {
                 ))
               ) : listings.length === 0 ? (
                 <div className="col-span-3 text-center text-gray-600 py-12">
-                  <p className="text-lg mb-2">You haven't created any listings yet.</p>
+                  <p className="text-lg mb-2">You haven&apos;t created any listings yet.</p>
                   <p className="text-sm">Create your first listing to get started!</p>
                 </div>
               ) : (
