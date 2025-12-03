@@ -135,8 +135,9 @@ export default function ProductDetailedView({
       // Close the product view
       onClose();
       
-    } catch (error: any) {
-      setMessageError(error.message || "Failed to create conversation. Please try again.");
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to create conversation. Please try again.";
+      setMessageError(errorMessage);
       console.error("Error creating conversation:", error);
     } finally {
       setIsCreatingConversation(false);
@@ -183,8 +184,9 @@ export default function ProductDetailedView({
       onClose();
       // Refresh the page or update the listing status
       window.location.reload();
-    } catch (error: any) {
-      setMarkSoldError(error.message || "Failed to mark listing as sold. Please try again.");
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to mark listing as sold. Please try again.";
+      setMarkSoldError(errorMessage);
       console.error("Error marking listing as sold:", error);
     } finally {
       setIsMarkingSold(false);
@@ -222,7 +224,7 @@ export default function ProductDetailedView({
           if (errorData && typeof errorData === 'object') {
             errorMessage = errorData.error || errorData.message || errorMessage;
           }
-        } catch (parseError) {
+        } catch {
           // If response is not JSON, try to get text
           const textError = await response.text().catch(() => "Unknown error");
           console.error("Delete error (non-JSON):", textError, "Status:", response.status);
@@ -241,8 +243,9 @@ export default function ProductDetailedView({
       onClose();
       // Refresh the page to show updated list
       window.location.reload();
-    } catch (error: any) {
-      alert(`Failed to delete listing: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      alert(`Failed to delete listing: ${errorMessage}`);
       console.error("Error deleting listing:", error);
     } finally {
       setIsDeleting(false);

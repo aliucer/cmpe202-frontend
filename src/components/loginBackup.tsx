@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -136,7 +136,7 @@ export default function LoginPage() {
 
                     <div className="mt-6">
                         <div className="text-center text-sm">
-                            <span className="text-gray-600">Don't have an account? </span>
+                            <span className="text-gray-600">Don&apos;t have an account? </span>
                             <Link
                                 href="/register"
                                 className="font-medium text-[#0033A0] hover:text-[#0033A0]/80"

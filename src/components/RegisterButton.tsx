@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 
 /**
@@ -31,9 +30,9 @@ import { useRouter } from 'next/navigation';
  * - TODO: Consider using NextAuth.js or similar authentication library for better state management
  */
 export default function RegisterButton() {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isAuthenticated] = useState<boolean>(false);
     //const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading] = useState<boolean>(false);
     //const router = useRouter();
 
     /**
@@ -61,12 +60,12 @@ export default function RegisterButton() {
             //     // TODO: Remove this when backend authentication is implemented
             //     const storedUser = localStorage.getItem('user');
             //     if (storedUser) {
-            //         const userData = JSON.parse(storedUser);
-            //         setUser(userData);
+            //         // const userData = JSON.parse(storedUser);
+            //         // setUser(userData);
             //         setIsAuthenticated(true);
             //     } else {
             //         setIsAuthenticated(false);
-            //         setUser(null);
+            //         // setUser(null);
             //     }
             // } catch (error) {
             //     console.error('Error checking auth status:', error);
@@ -79,37 +78,6 @@ export default function RegisterButton() {
         console.log("Checking Authorization");
         checkAuthStatus();
     }, []);
-
-    /**
-     * Handle logout functionality
-     * TODO: Replace with actual API call to backend logout endpoint
-     * Example: POST /api/auth/logout
-     */
-    const handleLogout = async () => {
-        // try {
-        //     // TODO: Replace this with actual API call
-        //     // const response = await fetch('/api/auth/logout', {
-        //     //     method: 'POST',
-        //     //     credentials: 'include',
-        //     // });
-        //     // if (response.ok) {
-        //     //     setIsAuthenticated(false);
-        //     //     setUser(null);
-        //     //     router.push('/');
-        //     // }
-
-        //     // Temporary: Clear localStorage for development
-        //     // TODO: Remove this when backend authentication is implemented
-        //     localStorage.removeItem('user');
-        //     localStorage.removeItem('token');
-        //     setIsAuthenticated(false);
-        //     setUser(null);
-        //     router.push('/');
-        // } catch (error) {
-        //     console.error('Error during logout:', error);
-        //     // TODO: Show user-friendly error message
-        // }
-    };
 
     // Show loading state (optional - can be removed if not needed)
     if (isLoading) {
