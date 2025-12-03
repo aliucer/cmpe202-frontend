@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Textbooks",
+    "slug": "textbooks"
+  },
+  {
+    "id": 2,
+    "name": "Electronics",
+    "slug": "electronics"
+  },
+  {
+    "id": 3,
+    "name": "Furniture",
+    "slug": "furniture"
+  },
+  {
+    "id": 4,
+    "name": "Essentials",
+    "slug": "essentials"
+  },
+  {
+    "id": 5,
+    "name": "Clothing",
+    "slug": "clothing"
+  },
+  {
+    "id": 6,
+    "name": "Sports & Outdoors",
+    "slug": "sports-outdoors"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "email": "ali@sjsu.edu",
+    "display_name": "Ali",
+    "is_admin": false,
+    "is_active": true,
+    "created_at": "2025-09-15T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "email": "sue@sjsu.edu",
+    "display_name": "Sue",
+    "is_admin": false,
+    "is_active": true,
+    "created_at": "2025-09-20T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "email": "admin@sjsu.edu",
+    "display_name": "Admin",
+    "is_admin": true,
+    "is_active": true,
+    "created_at": "2025-09-05T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "email": "lee@sjsu.edu",
+    "display_name": "Lee",
+    "is_admin": false,
+    "is_active": true,
+    "created_at": "2025-09-25T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "email": "mia@sjsu.edu",
+    "display_name": "Mia",
+    "is_admin": false,
+    "is_active": true,
+    "created_at": "2025-09-27T12:00:00Z"
+  }
+]

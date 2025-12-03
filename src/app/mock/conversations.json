@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "listing_id": 1,
+    "buyer_id": 2,
+    "seller_id": 2,
+    "created_at": "2025-10-09T12:00:00Z",
+    "last_message_at": "2025-10-09T16:00:00Z"
+  },
+  {
+    "id": 2,
+    "listing_id": 2,
+    "buyer_id": 5,
+    "seller_id": 5,
+    "created_at": "2025-10-07T12:00:00Z",
+    "last_message_at": "2025-10-08T00:00:00Z"
+  }
+]

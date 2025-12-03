@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "conversation_id": 1,
+    "sender_id": 2,
+    "body": "Hi, is this still available?",
+    "created_at": "2025-10-09T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "conversation_id": 1,
+    "sender_id": 1,
+    "body": "Yes, it is!",
+    "created_at": "2025-10-09T13:00:00Z"
+  },
+  {
+    "id": 3,
+    "conversation_id": 2,
+    "sender_id": 5,
+    "body": "Is the price negotiable?",
+    "created_at": "2025-10-07T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "conversation_id": 2,
+    "sender_id": 5,
+    "body": "A little, what were you thinking?",
+    "created_at": "2025-10-07T16:00:00Z"
+  }
+]
