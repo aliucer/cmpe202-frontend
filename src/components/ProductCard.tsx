@@ -279,21 +279,25 @@ export default function ProductCard({ listing, showActions = true }: ProductCard
                 {isSubmitting ? "Marking as Sold..." : "Yes, Mark as Sold"}
               </button>
             </div>
-            {/* Product Detailed View Modal */}
-            {showProductDetails && productData && (
-              <div onClick={(e) => e.stopPropagation()}>
-                <ProductDetailedView
-                  product={productData}
-                  isOpen={showProductDetails}
-                  onClose={() => {
-                    setShowProductDetails(false);
-                    setProductData(null);
-                  }}
-                  showActions={true}
-                  isLoggedIn={true}
-                />
-              </div>
-            )}
           </div>
-          );
+        </div>
+      )}
+
+      {/* Product Detailed View Modal */}
+      {showProductDetails && productData && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <ProductDetailedView
+            product={productData}
+            isOpen={showProductDetails}
+            onClose={() => {
+              setShowProductDetails(false);
+              setProductData(null);
+            }}
+            showActions={true}
+            isLoggedIn={true}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
